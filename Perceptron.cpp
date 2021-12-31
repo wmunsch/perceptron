@@ -7,11 +7,11 @@ using std::vector;
 
 double integration_function(const vector<double>& input, const vector<double>& weights) {
 	/*double sum = 0;
-	for (int i = 0; i < input.size(); i++) {
+	for (int i = 0; i < input.size() - 1; i++) {
 		sum += input[i] * weights[i];
 	}
 	return sum;*/
-	return inner_product(input.begin(), input.end(), weights.begin(), 0.0);
+	return inner_product(input.begin(), input.end() - 1, weights.begin(), 0.0);
 }
 
 int activation_function(const double input) {
@@ -34,6 +34,7 @@ void randomize_weights(vector<double>& weights) {
 
 void training_function(vector<vector<double>>& input, vector<double>& weights) {
 	int incorrect = 0;
+
 	for (int i = 0; i < MAX_EPOCHS; i++) {
 		incorrect = 0;
 		std::random_device seed;
@@ -59,7 +60,6 @@ void training_function(vector<vector<double>>& input, vector<double>& weights) {
 		if (incorrect == 0) {
 			break;
 		}
-
 	}
 }
 int classify(const vector<double>& input, const vector<double>& weights) {
